@@ -9,7 +9,7 @@ public class ReadCSV {
 
 	public static void read(String[] args) {
 
-	  String strFile = "C:/FileIO/example.csv";
+	  String strFile = "example.csv";
 	 
 	  BufferedReader br = new BufferedReader( new FileReader(strFile));
 	  String strLine = "";
@@ -34,4 +34,3 @@ public class ReadCSV {
 	  }       
 	}
 }
-	
