@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,8 +18,6 @@ import android.widget.EditText;
 import android.os.Build;
 
 public class BarcodeReader extends Activity implements OnClickListener {
-
-	private Button buttonScan;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +77,12 @@ public class BarcodeReader extends Activity implements OnClickListener {
 		IntentIntegrator integrator = new IntentIntegrator(this);
 		integrator.initiateScan();
 	}
-	
+			
+		  public void openFile (View view) {
+			  
+			  
+			  
+		  }
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 	    IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
 	    if (scanResult != null) {

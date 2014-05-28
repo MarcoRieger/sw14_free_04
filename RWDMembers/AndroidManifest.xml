@@ -12,7 +12,7 @@
         android:allowBackup="true"
         android:icon="@drawable/rwd_icon_1"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/ActionBar">
         <activity
             android:name="com.example.rwdmembers.BarcodeReader"
             android:label="@string/app_name" >

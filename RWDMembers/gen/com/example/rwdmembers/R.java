@@ -29,23 +29,50 @@ public final class R {
         public static final int rwd_icon_finish=0x7f020004;
     }
     public static final class id {
-        public static final int action_settings=0x7f080003;
-        public static final int buttonScan=0x7f080001;
+        public static final int action_open=0x7f08000c;
+        public static final int action_settings=0x7f08000d;
+        public static final int buttonScan=0x7f080003;
         public static final int container=0x7f080000;
-        public static final int etBarcode=0x7f080002;
+        public static final int etBarcode=0x7f080004;
+        public static final int fragment_container=0x7f080005;
+        public static final int menuitem_about=0x7f08000a;
+        public static final int menuitem_add=0x7f080007;
+        public static final int menuitem_feedback=0x7f080009;
+        public static final int menuitem_quit=0x7f08000b;
+        public static final int menuitem_search=0x7f080006;
+        public static final int menuitem_share=0x7f080008;
+        public static final int textView1=0x7f080002;
+        public static final int textView2=0x7f080001;
     }
     public static final class layout {
         public static final int activity_barcode_reader=0x7f030000;
-        public static final int fragment_barcode_reader=0x7f030001;
+        public static final int afragment=0x7f030001;
+        public static final int bfragment=0x7f030002;
+        public static final int fragment_barcode_reader=0x7f030003;
+        public static final int main=0x7f030004;
     }
     public static final class menu {
         public static final int barcode_reader=0x7f070000;
+        public static final int main=0x7f070001;
     }
     public static final class string {
-        public static final int action_settings=0x7f050001;
+        public static final int ButtonScan=0x7f050001;
+        public static final int OpenFile=0x7f050002;
+        public static final int action_settings=0x7f050003;
         public static final int app_name=0x7f050000;
+        public static final int menu_about=0x7f050008;
+        public static final int menu_add=0x7f050005;
+        public static final int menu_feedback=0x7f050007;
+        public static final int menu_quit=0x7f050006;
+        /**  Menu Strings 
+         */
+        public static final int menu_search=0x7f050004;
+        public static final int menu_share=0x7f050009;
     }
     public static final class style {
+        /**  Application theme. 
+         */
+        public static final int ActionBar=0x7f060001;
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
@@ -68,9 +95,8 @@ public final class R {
  API 14 theme customizations can go here. 
          */
         public static final int AppBaseTheme=0x7f060000;
-        /**  Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
+        /**  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f060001;
+        public static final int AppTheme=0x7f060002;
     }
 }
