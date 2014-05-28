@@ -5,7 +5,12 @@
         android:icon="@android:drawable/ic_menu_search" 
         android:showAsAction="ifRoom">
     </item>
-    
+     <item
+        android:id="@+id/action_open"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="Open File">
+    </item>
    
    
    
@@ -14,12 +19,8 @@
         android:icon="@android:drawable/ic_menu_close_clear_cancel"
         android:showAsAction="ifRoom" >
     </item>
-     <item
-        android:id="@+id/action_open"
-        android:orderInCategory="100"
-        android:showAsAction="always"
-        android:title="Open File">
-    </item>
+    
+
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

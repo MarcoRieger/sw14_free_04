@@ -62,7 +62,7 @@ public class BarcodeReader extends Activity implements OnClickListener {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_barcode_reader, container, false);
+            View rootView = inflater.inflate(R.layout.main, container, false);
             return rootView;
         }
     }
