@@ -1,0 +1,115 @@
+GUI --> Tab Navigation
+Open File --> Pfad auswählen wo die CSV gespeichert ist
+Einlesen der CSV
+Abspeichern der CSV und Ausgabe in Tab Member. Als Sortierte Liste
+	Diese soll durchscrollbar sein UND am Rand das Alphabeth enthalten(klickbar)
+	Klickt man auf einen Namen soll er automatisch auf anwesend gesetzt werden(Checkbox)
+Im Tab Scan ist nur der Button zum einscannen! (wir dieser gecklickt soll man im Scanner
+	bleiben bis man zurück klickt--> schnelleres Scannen)
+	Scannt man einen Barcode 2 mal kann man auswählen, den Besucher wieder auszutragen oder
+	ihm einen Gastbesucher hinzuzufügen
+Save File --> neue Liste als neues FIle speichern. Speichername soll das aktuelle Datum sein
+	Die Ausgangsnamensliste soll nicht verändert werden.
+	
+	
+Zusatz:
+
+Tab Statistik --> einen Namen auswählen und zeigen wie oft vonwieviel Spielen er anwesend war
+			  --> Mehrere Spiele auswählen und die durchschnittliche besuchzahl anzeigen
+			  
+Die Mitglieder dazu zwingen die App auch downzuloaden:
+- Im App die Funktion bieten, seinen Barcode zu fotografieren und abzuspeichern, um diesen
+	immer zu zeigen(Vorteil--> Mitgliedausweis wird nicht gebraucht)
+- Jedem Mitglied einen Benutzername und Passwort zuteilen, damit er seinen eigenen Barcode
+	ansehen kann.
+	
+	
+	
+	
+	
+___________________________________________________________________________BarcodeReader:
+package com.example.rwdmember;
+
+import com.example.rwdmember.IntentIntegrator;
+import com.example.rwdmember.IntentResult;
+
+import android.app.Activity;
+import android.app.ActionBar;
+import android.app.Fragment;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.os.Build;
+
+public class BarcodeReader extends MainActivity implements OnClickListener {
+	
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_barcode_reader);       
+
+        if (savedInstanceState == null) {
+            getFragmentManager().beginTransaction()
+                    .add(R.id.container, new PlaceholderFragment())
+                    .commit();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * A placeholder fragment containing a simple view.
+     */
+    public static class PlaceholderFragment extends Fragment {
+
+        public PlaceholderFragment() {
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment_barcode_reader, container, false);
+            return rootView;
+        }
+    }
+
+
+
+
+	@Override
+	public void onClick(DialogInterface dialog, int which) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	
+	
+}
