@@ -11,4 +11,12 @@
         android:text="Hier Memberliste implementieren!"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
+    
+      <EditText
+        android:id="@+id/OneMember"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="17dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
 </LinearLayout>

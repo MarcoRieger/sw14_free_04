@@ -1,34 +1,26 @@
 package com.example.rwdmember;
 
+import java.io.IOException;
 import java.util.Locale;
 
-import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.TextView;
 
 
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
 
-	private Fragment_Scanner fragment_scanner;
-	private Fragment_Member fragment_member;
 
-	
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
 	 * fragments for each of the sections. We use a {@link FragmentPagerAdapter}
@@ -81,17 +73,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 					.setText(mSectionsPagerAdapter.getPageTitle(i))
 					.setTabListener(this));
 		}
-		
-		
-	//	fragment_scanner = (Fragment_Scanner) Fragment.instantiate(this, Fragment_Scanner.class.getName(), null);
-		//fragment_member = (Fragment_Member) Fragment.instantiate(this, Fragment_Member.class.getName(), null);
-
-		//FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-
-		//fragmentTransaction.add(R.id.container, fragment_scanner);
-		//fragmentTransaction.commit();
-
-		
 
 	}
 
@@ -99,22 +80,35 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	public boolean onCreateOptionsMenu(Menu menu) {
 
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.over_all, menu);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+		switch (item.getItemId()) {
+	    case R.id.menuitem_search:
+	        search();
+	        return true;
+	    case R.id.menuitem_open:
+	        try {
+				openFile();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	        return true;
+	    case R.id.menuitem_save:
+	        saveFile();
+	        return true;
+	    case R.id.action_settings:
+	        Settings();
+	        return true;
+	    default:
+	        return super.onOptionsItemSelected(item);
+	    }
 
+	}
 	@Override
 	public void onTabSelected(ActionBar.Tab tab,
 			FragmentTransaction fragmentTransaction) {
@@ -151,12 +145,13 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			
 			switch (position) {
 			case 0:	
-					return Fragment_Scanner.newInstance(0);
+				return Fragment_Scanner.newInstance(0);
 			case 1:
-					return Fragment_Member.newInstance(1);	
+				return Fragment_Member.newInstance(1);	
 			case 2:
 				return Fragment_Statistic.newInstance(2);
-			default: return null;
+			default: 
+				return null;
 			}
 			
 		}
@@ -199,6 +194,24 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	    	etBarcode.setText(barcode);
 	    }
 	  // else continue with any other code you need in the method
+	}
+	
+	public void search (){
+		//Search name in Memberlist
+	}
+	
+	public void openFile () throws IOException {
+		Read_CSV read = new Read_CSV();	
+		read.readFile();
+
+	}
+		
+	public void saveFile (){
+		//Save File as new CSV With option to set File name
+	}
+	
+	public void Settings (){
+		//Output for Settings
 	}
 	
 	

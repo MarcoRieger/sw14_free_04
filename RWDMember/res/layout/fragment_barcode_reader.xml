@@ -34,7 +34,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="95dp"
-        android:text="Barcode Einlsesen!"
+        android:text="Barcode Einlesen!"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>
