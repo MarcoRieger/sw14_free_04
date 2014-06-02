@@ -3,11 +3,13 @@ package com.example.rwdmember;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.R.string;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -17,51 +19,99 @@ import au.com.bytecode.opencsv.CSVReader;
 
 
 
-public class Read_CSV extends Activity {
+
+@SuppressLint("SdCardPath")
+public class Read_CSV extends ArrayAdapter<Member> {
 	
 
-	//@SuppressLint("SdCardPath")
-	@SuppressWarnings("resource")
+	
+	
+	
+	
+	
+
+
+	public Read_CSV(Context context, int resource, int textViewResourceId) {
+		super(context, resource, textViewResourceId);
+		// TODO Auto-generated constructor stub
+	}
+
 	public void readFile() throws IOException {
-/*		String csvFilename = "/sdcard/Namen_2.csv";
+
+		
+		try {
+			// Get input stream and Buffered Reader for our data file.
+			String csvFilename = "/sdcard/Namen_2.csv";
+			@SuppressWarnings("resource")
+			BufferedReader csvReader = new BufferedReader(new FileReader(csvFilename));
+			String line;
+
+			//Read each line
+			while ((line = csvReader.readLine()) != null) {
+
+				//Split to separate the name from the capital
+				String[] RowData = line.split(",");
+
+				//Create a State object for this row's data.
+				Member cur = new Member();
+				cur.setFirstName(RowData[0]);
+				cur.setLastName(RowData[1]);
+				cur.setBarcode(RowData[2]);
+				cur.setSelected(RowData[3]);
+			
+				//Add the State object to the ArrayList (in this case we are the ArrayList).
+				this.add(cur);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+		
+		
+		
+		
+		
+		
+		
+		
+		/*		String csvFilename = "/sdcard/Namen_2.csv";
 		CSVReader csvReader = new CSVReader(new FileReader(csvFilename));
 				List<String[]> Members = csvReader.readAll();
 
 		ListView OneMember = (ListView) findViewById(R.id.listViewMember);
 		OneMember.setAdapter(Members);
 		*/
+	
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/*
 		String csvFile = "/sdcard/Namen_2.csv";
+		CSVReader csvReader = new CSVReader(new FileReader(csvFile));
 		BufferedReader br = null;
-		String line = "";
-		String cvsSplitBy = ";";
-		String country = "";
 		br = new BufferedReader(new FileReader(csvFile));
-		while ((line = br.readLine()) != null) {
- 
-		        // use comma as separator
-			
-				country += line;
-				country+= cvsSplitBy;
-		}
-			
-			
-			
-	    //ListView allMember = (ListView) findViewById(R.id.listViewMember);
-	    //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-             //   android.R.layout.simple_list_item_1, Members.get(1));
-	  // allMember.setAdapter(Members);
+		ArrayList<member> member = br.readLine();
+		*/
 
-	    /*
-	    List<String> firstColumn = new ArrayList<String>();
-	    for (String[] row : acNames) {
-	        firstColumn.add(row[0]);
-	    }
-	    ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getBaseContext(), R.layout.listitem, firstColumn);
-	    */
-	    
-	    
-		//csvFile.close();
 	}
 
 }

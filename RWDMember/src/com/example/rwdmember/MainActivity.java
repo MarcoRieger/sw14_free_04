@@ -201,7 +201,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	}
 	
 	public void openFile () throws IOException {
-		Read_CSV read = new Read_CSV();	
+		Read_CSV read = new Read_CSV(null, 0, 0);	
 		read.readFile();
 
 	}
