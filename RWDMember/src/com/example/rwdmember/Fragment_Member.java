@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class Fragment_Member extends Fragment {
 	
@@ -13,6 +15,8 @@ public class Fragment_Member extends Fragment {
 		Bundle args = new Bundle();
 		fragment.setArguments(args);
 		return fragment;
+		//Test
+		
 	}
 
 
@@ -24,6 +28,13 @@ public class Fragment_Member extends Fragment {
 				false);
 		return rootView;
 	}
+	/*ListView lv = (ListView) findViewById(R.id.listView);
+	simpleAdpt = new SimpleAdapter(this, memberList, android.R.layout.simple_list_item_1, 
+			new int[] {android.R.id.text1});
+	lv.setAdapter(simpleAdpt);*/
 	
+	
+
+
 		
 }

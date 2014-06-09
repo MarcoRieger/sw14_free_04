@@ -6,23 +6,18 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import android.R.string;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
-import android.content.res.AssetManager;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
+import android.os.Bundle;
 import android.widget.ListView;
-import android.widget.TextView;
-import au.com.bytecode.opencsv.CSVReader;
-import au.com.bytecode.opencsv.bean.ColumnPositionMappingStrategy;
-import au.com.bytecode.opencsv.bean.CsvToBean;
+import android.widget.SimpleAdapter;
+
+import java.util.Map;
 
 @SuppressLint("SdCardPath")
-public class Read_CSV {
-	
+public class Read_CSV extends Activity {
+	  List<Member> memberList = new ArrayList<Member>();  
+
 	public static void readFile() {  
 		  String csvFileToRead = "/sdcard/Namensliste.csv";  
 		  BufferedReader br = null;  
@@ -50,9 +45,9 @@ public class Read_CSV {
 		    // adding car objects to a list  
 		    memberList.add(memberObject);  
 		  
-		   }  
+		   } 
 		   //values stored in memberList!!!  
-		  
+
 		  } catch (FileNotFoundException e) {  
 		   e.printStackTrace();  
 		  } catch (IOException e) {  
