@@ -78,7 +78,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		}
 		
 		
-		ListView lv = (ListView) findViewById(R.id.listView);
+		//ListView lv = (ListView) findViewById(R.id.listView);
 
 	    // This is a simple adapter that accepts as parameter
 	    // Context
@@ -102,14 +102,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		switch (item.getItemId()) {
 	    case R.id.menuitem_search:
 	        search();
-	        return true;
-	    case R.id.menuitem_open:
-	        try {
-				openFile();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 	        return true;
 	    case R.id.menuitem_save:
 	        saveFile();
@@ -213,11 +205,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		//Search name in Memberlist
 	}
 	
-	public void openFile () throws IOException {
-		Read_CSV read = new Read_CSV();	
-		read.readFile(); 
-
-	}
 		
 	public void saveFile (){
 		//Save File as new CSV With option to set File name

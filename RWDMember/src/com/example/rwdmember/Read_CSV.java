@@ -9,6 +9,7 @@ import java.util.List;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -16,14 +17,14 @@ import java.util.Map;
 
 @SuppressLint("SdCardPath")
 public class Read_CSV extends Activity {
-	  List<Member> memberList = new ArrayList<Member>();  
+	private static ArrayList<String> memberList = new ArrayList<String>(); //List<Member>
 
 	public static void readFile() {  
 		  String csvFileToRead = "/sdcard/Namensliste.csv";  
 		  BufferedReader br = null;  
 		  String line = "";  
 		  String splitBy = ",";  
-		  List<Member> memberList = new ArrayList<Member>();  
+		  setMemberList(new ArrayList<String>());  
 		  
 		  try {  
 		  
@@ -37,14 +38,13 @@ public class Read_CSV extends Activity {
 		    Member memberObject = new Member();  
 		  
 		    // add values from csv to car object  
-		    memberObject.setFirstName(members[0]);  
-		    memberObject.setLastName(members[1]);  
+		    memberObject.setLastName(members[0]);  
+		    memberObject.setFirstName(members[1]);  
 		    memberObject.setBarcode(members[2]);  
 		    memberObject.setSelected(members[3]);  
 		  
 		    // adding car objects to a list  
-		    memberList.add(memberObject);  
-		  
+		    getMemberList().add(members[0].toString());  		  
 		   } 
 		   //values stored in memberList!!!  
 
@@ -63,5 +63,14 @@ public class Read_CSV extends Activity {
 		  }  
 		 }  
 //Here we have a List of Members
+
+	public static ArrayList<String> getMemberList() {
+		return memberList;
+	}
+
+	public static void setMemberList(ArrayList<String> memberList) {
+		Read_CSV.memberList = memberList;
+	}
+
 
 }
