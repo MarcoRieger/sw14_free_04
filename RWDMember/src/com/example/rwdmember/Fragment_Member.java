@@ -1,5 +1,5 @@
 package com.example.rwdmember;
-//Test
+//See
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,10 +22,6 @@ public class Fragment_Member extends Fragment {
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_member, container,
 				false);
-		/*TextView textView = (TextView) rootView
-				.findViewById(R.id.section_label);
-		textView.setText(Integer.toString(getArguments().getInt(
-				ARG_SECTION_NUMBER)));*/
 		return rootView;
 	}
 	
