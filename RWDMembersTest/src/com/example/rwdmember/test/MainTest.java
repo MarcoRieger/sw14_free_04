@@ -4,7 +4,6 @@ import com.example.rwdmember.MainActivity;
 import com.robotium.solo.Solo;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.widget.EditText;
 
 public class MainTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
@@ -28,9 +27,9 @@ public class MainTest extends ActivityInstrumentationTestCase2<MainActivity> {
 		mySolo.clickOnActionBarItem(2); //Statistic
 	}
 	
-	public void testActionBarScroll() {
+	/*public void testActionBarScroll() {
 		mySolo.scrollViewToSide(mySolo.getView(0), mySolo.RIGHT);
-	}
+	}*/
 	
 	public void testButton() {
 		mySolo.clickOnActionBarItem(0);
@@ -42,7 +41,7 @@ public class MainTest extends ActivityInstrumentationTestCase2<MainActivity> {
 		mySolo.clickOnMenuItem("Save to File");
 	}
 	
-	//---Scan the Member Card of Karl-Heinz Rieger for positive result
+	//---Scan the Member Card of Member01 Rieger for positive result
 	//---Requires testing with an android mobile phone
 	public void testInputField() {
 		mySolo.clickOnButton("Scan");
@@ -52,5 +51,12 @@ public class MainTest extends ActivityInstrumentationTestCase2<MainActivity> {
 		boolean test_input = mySolo.searchEditText(strIn);
 		
 		assertEquals("text is not matched", true, test_input);
+	}
+	
+	public void testMemberView() {
+		mySolo.clickOnActionBarItem(1);
+		mySolo.clickOnMenuItem("Open CSV File");
+		
+		
 	}
 }

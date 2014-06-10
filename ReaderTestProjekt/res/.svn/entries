@@ -1,43 +1,0 @@
-10
-
-dir
-11
-https://github.com/MarcoRieger/sw14_free_04/trunk/ReaderTestProject/res
-https://github.com/MarcoRieger/sw14_free_04
-
-
-
-2014-05-24T10:43:12.000000Z
-10
-johannes.neuhold
-
-
-svn:special svn:externals svn:needs-lock
-
-
-
-
-
-
-
-
-
-
-
-f8eaaec7-d43f-5366-547f-ce57b7db7bff
-
-drawable-hdpi
-dir
-
-drawable-ldpi
-dir
-
-drawable-mdpi
-dir
-
-drawable-xhdpi
-dir
-
-values
-dir
-

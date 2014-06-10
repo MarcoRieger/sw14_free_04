@@ -1,0 +1,73 @@
+package com.example.rwdmember;
+
+import android.widget.CheckBox;
+import android.widget.TextView;
+
+
+public class Member {
+  
+ String firstName = null;
+ String lastName = null;
+ String Barcode = null;
+ boolean selected = false;
+  
+ /*public Member(String firstName, String lastName, int Barcode, boolean selected) {
+  super();
+  this.firstName = firstName;
+  this.lastName = lastName;
+  this.Barcode = Barcode;
+  this.selected = selected;
+ }*/
+  
+ 
+ 
+ public String getFirstName() {
+  return firstName;
+ }
+ public void setFirstName(String firstName) {
+  this.firstName = firstName;
+ }
+ public String getLastName() {
+  return lastName;
+ }
+ public void setLastName(String lastName) {
+  this.lastName = lastName;
+ }
+ 
+ public String getBarcode() {
+	  return Barcode;
+	 }
+	 public void setBarcode(String Barcode) {
+	  this.Barcode = Barcode;
+	 }
+ 
+ public boolean isSelected() {
+  return selected;
+ }
+ public void setSelected(String rowData) {
+  this.selected = rowData != null;
+ }
+  
+}
+
+public static class MemberViewHolder {  
+    private CheckBox checked ;  
+    private TextView text ;  
+    public MemberViewHolder() {}  
+    public MemberViewHolder(TextView textview, CheckBox checkbox) {  
+      this.checked = checkbox ;  
+      this.text = textview ;  
+    }  
+    public CheckBox getCheckBox() {  
+      return checked;  
+    }  
+    public void setCheckBox(CheckBox checkbox) {  
+      this.checked = checkbox;  
+    }  
+    public TextView getTextView() {  
+      return text;  
+    }  
+    public void setTextView(TextView textview) {  
+      this.text = textview;  
+    }      
+  }  

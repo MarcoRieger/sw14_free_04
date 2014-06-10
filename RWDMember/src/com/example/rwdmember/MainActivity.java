@@ -1,7 +1,7 @@
 package com.example.rwdmember;
 
-import java.io.IOException;
-import java.util.List;
+//import java.io.IOException;
+//import java.util.List;
 import java.util.Locale;
 
 import android.app.ActionBar;
@@ -17,8 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
+//import android.widget.ListView;
+//import android.widget.SimpleAdapter;
 
 
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {

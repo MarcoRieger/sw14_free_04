@@ -1,6 +1,5 @@
 package com.example.rwdmember;
 
-
 public class Member {
   
  String firstName = null;
@@ -16,7 +15,6 @@ public class Member {
   this.selected = selected;
  }*/
   
- 
  
  public String getFirstName() {
   return firstName;
@@ -41,8 +39,11 @@ public class Member {
  public boolean isSelected() {
   return selected;
  }
- public void setSelected(String rowData) {
-  this.selected = rowData != null;
+ public void setSelected(boolean select) {
+  this.selected = select;
  }
+ public void toggleChecked() {  
+	 selected = !selected ;  
+   } 
   
 }
