@@ -1,6 +1,10 @@
 package com.example.rwdmember;
 //See
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,9 +12,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
+import android.widget.CheckBox;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 public class Fragment_Member extends Fragment {
 	
@@ -19,8 +23,68 @@ public class Fragment_Member extends Fragment {
 		Bundle args = new Bundle();
 		fragment.setArguments(args);
 		return fragment;
-		//Test
+		//Test	
+	}
+	private ArrayAdapter<Member> memberListAdapter;
+	private ListView listViewMembers;
+	
+private static class MemberArrayAdapter extends ArrayAdapter<Member> {
 		
+		private LayoutInflater inflater;
+		
+		//---Member Array Adapter for handling the Member List!!!
+		public MemberArrayAdapter(Context context, List<Member> memberList) {  
+	      super(context, R.layout.listview_members, R.id.textView1, memberList);
+	      // Cache the LayoutInflate to avoid asking for a new one each time.  
+	      inflater = LayoutInflater.from(context); 
+	    }
+		@Override  
+	    public View getView(int position, View convertView, ViewGroup parent) {   
+	      Member member = (Member) this.getItem(position); // Member for display
+	      
+	   //child views each row.  
+	      CheckBox checkbox;   
+	      TextView text;
+	      
+	   // Create a new row  
+	      if (convertView == null) {  
+	        convertView = inflater.inflate(R.layout.listview_members, null);
+	        
+		    // Find the child  
+		    text = (TextView) convertView.findViewById(R.id.textView1);  
+		    checkbox = (CheckBox) convertView.findViewById(R.id.buttonScan); //buttonScan Color???
+		      
+		    // Tags the row with it's child views  
+		    convertView.setTag(new MemberViewHolder(text,checkbox));
+		    
+		    // If CheckBox is toggled, update the planet it is tagged with.  
+	        checkbox.setOnClickListener(new View.OnClickListener() {  
+	          public void onClick(View view) {  
+	            CheckBox cBox = (CheckBox) view ;  
+	            Member mem = (Member) cBox.getTag();  
+	            mem.setSelected(cBox.isChecked()); 
+	          }  
+	        });          
+	      }
+	      // Reuse existing view  
+	      else {  
+	        // because of ViewHolder, no call of findViewById  
+	        MemberViewHolder viewHolder = (MemberViewHolder) convertView.getTag();  
+	        checkbox = viewHolder.getCheckBox() ;  
+	        text = viewHolder.getTextView() ;  
+	      }  
+	      
+	      // Tag the CheckBox with the Member it is displaying, so that we can  
+	      // access the planet in onClick() when the CheckBox is toggled.  
+	      checkbox.setTag(member);   
+	        
+	      // Display member data  
+	      checkbox.setChecked(member.isSelected());
+	      CharSequence membertext = member.getLastName() + " " + member.getFirstName();
+	      text.setText(membertext);
+	        
+	      return convertView;  
+	    }  
 	}
 
 	@Override
@@ -29,28 +93,45 @@ public class Fragment_Member extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_member, container,
 				false);
 		
-		Read_CSV.readFile();
-		ListView listViewMembers = (ListView) rootView.findViewById(R.id.listViewMembers);
-	    ListAdapter adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.listview_members, Read_CSV.getMemberList());
+		//Read_CSV.readFile();
+		//ListView listViewMembers = (ListView) rootView.findViewById(R.id.listViewMembers);
+		listViewMembers = (ListView) rootView.findViewById(R.id.listViewMembers);
+	    //ListAdapter adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.listview_members, Read_CSV.getMemberList());
 	    //MemberAdapter ... extends BaseAdapter
-	    listViewMembers.setAdapter(adapter);
+	    //listViewMembers.setAdapter(adapter);
 	   
 	    listViewMembers.setOnItemClickListener(new OnItemClickListener() {  	
 	    	@Override
       	  public void onItemClick(AdapterView<?> parent, View view,
       	    int position, long id) {
-      	    Toast.makeText(getActivity().getApplicationContext(),
+	    	Member member = memberListAdapter.getItem(position);
+	    	member.toggleChecked();
+	    	MemberViewHolder viewHolder = (MemberViewHolder) view.getTag();
+	    	viewHolder.getCheckBox().setChecked(member.isSelected());
+      	    /*Toast.makeText(getActivity().getApplicationContext(),
       	      "Click ListItem Number " + position, Toast.LENGTH_LONG)
-      	      .show();
+      	      .show();*/
       	  }
       	}); 
 		
+	    ArrayList<Member> memberlist = new ArrayList<Member>();
+	    memberlist = Read_CSV.readFile();
+	    
+	    memberListAdapter = new MemberArrayAdapter(getActivity().getApplicationContext(), memberlist);
+	    listViewMembers.setAdapter(memberListAdapter);
+	    
 		return rootView;
 	}
+	
 	/*ListView lv = (ListView) findViewById(R.id.listView);
 	simpleAdpt = new SimpleAdapter(this, memberList, android.R.layout.simple_list_item_1, 
 			new int[] {android.R.id.text1});
 	lv.setAdapter(simpleAdpt);*/
+
+	/*private ListView findViewById(int listviewmembers) {
+		// TODO Auto-generated method stub
+		return null;
+	}*/
 	
 	
 
