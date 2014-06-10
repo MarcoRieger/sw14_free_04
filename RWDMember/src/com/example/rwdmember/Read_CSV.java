@@ -6,29 +6,25 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import android.R.string;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
-import android.content.res.AssetManager;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
+import android.os.Bundle;
+import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import au.com.bytecode.opencsv.CSVReader;
-import au.com.bytecode.opencsv.bean.ColumnPositionMappingStrategy;
-import au.com.bytecode.opencsv.bean.CsvToBean;
+import android.widget.SimpleAdapter;
+
+import java.util.Map;
 
 @SuppressLint("SdCardPath")
-public class Read_CSV {
-	
+public class Read_CSV extends Activity {
+	private static ArrayList<String> memberList = new ArrayList<String>(); //List<Member>
+
 	public static void readFile() {  
 		  String csvFileToRead = "/sdcard/Namensliste.csv";  
 		  BufferedReader br = null;  
 		  String line = "";  
 		  String splitBy = ",";  
-		  List<Member> memberList = new ArrayList<Member>();  
+		  setMemberList(new ArrayList<String>());  
 		  
 		  try {  
 		  
@@ -42,17 +38,16 @@ public class Read_CSV {
 		    Member memberObject = new Member();  
 		  
 		    // add values from csv to car object  
-		    memberObject.setFirstName(members[0]);  
-		    memberObject.setLastName(members[1]);  
+		    memberObject.setLastName(members[0]);  
+		    memberObject.setFirstName(members[1]);  
 		    memberObject.setBarcode(members[2]);  
 		    memberObject.setSelected(members[3]);  
 		  
 		    // adding car objects to a list  
-		    memberList.add(memberObject);  
-		  
-		   }  
+		    getMemberList().add(members[0].toString());  		  
+		   } 
 		   //values stored in memberList!!!  
-		  
+
 		  } catch (FileNotFoundException e) {  
 		   e.printStackTrace();  
 		  } catch (IOException e) {  
@@ -68,5 +63,14 @@ public class Read_CSV {
 		  }  
 		 }  
 //Here we have a List of Members
+
+	public static ArrayList<String> getMemberList() {
+		return memberList;
+	}
+
+	public static void setMemberList(ArrayList<String> memberList) {
+		Read_CSV.memberList = memberList;
+	}
+
 
 }

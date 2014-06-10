@@ -1,6 +1,7 @@
 package com.example.rwdmember;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Locale;
 
 import android.app.ActionBar;
@@ -16,6 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
 
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
@@ -73,6 +76,16 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 					.setText(mSectionsPagerAdapter.getPageTitle(i))
 					.setTabListener(this));
 		}
+		
+		
+		//ListView lv = (ListView) findViewById(R.id.listView);
+
+	    // This is a simple adapter that accepts as parameter
+	    // Context
+	    // Data list
+	    // The row layout that is used during the row creation
+	    // The keys used to retrieve the data
+	    // The View id used to show the data. The key number and the view id must match
 
 	}
 
@@ -89,14 +102,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		switch (item.getItemId()) {
 	    case R.id.menuitem_search:
 	        search();
-	        return true;
-	    case R.id.menuitem_open:
-	        try {
-				openFile();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 	        return true;
 	    case R.id.menuitem_save:
 	        saveFile();
@@ -200,11 +205,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		//Search name in Memberlist
 	}
 	
-	public void openFile () throws IOException {
-		Read_CSV read = new Read_CSV();	
-		read.readFile();
-
-	}
 		
 	public void saveFile (){
 		//Save File as new CSV With option to set File name
