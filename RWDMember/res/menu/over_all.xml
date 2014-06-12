@@ -7,13 +7,18 @@
         android:icon="@android:drawable/ic_menu_search" 
         android:showAsAction="ifRoom">
     </item>
-  
-
     
+    
+    
+    <item android:id="@+id/menuitem_open"
+        android:title="Open CSV File"
+        android:showAsAction="never">
+    </item>
+    
+   
           
-     <item android:id="@+id/menuitem_save"
+    <item android:id="@+id/menuitem_save"
         android:title="Save to File"
-        android:icon="@android:drawable/ic_menu_save"
         android:showAsAction="never">
     </item>
     

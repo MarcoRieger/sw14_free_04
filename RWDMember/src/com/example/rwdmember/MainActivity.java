@@ -103,6 +103,9 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	    case R.id.menuitem_search:
 	        search();
 	        return true;
+	    case R.id.menuitem_open:
+	        
+	        return true;
 	    case R.id.menuitem_save:
 	        saveFile();
 	        return true;

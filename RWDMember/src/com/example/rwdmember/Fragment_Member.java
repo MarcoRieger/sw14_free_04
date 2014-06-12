@@ -3,6 +3,7 @@ package com.example.rwdmember;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
@@ -13,10 +14,12 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class Fragment_Member extends Fragment {
+public class Fragment_Member extends Fragment{
 	
 	public static Fragment_Member newInstance(int sectionNumber) {
 		Fragment_Member fragment = new Fragment_Member();
@@ -25,10 +28,39 @@ public class Fragment_Member extends Fragment {
 		return fragment;
 		//Test	
 	}
-	private ArrayAdapter<Member> memberListAdapter;
+	
+	/*private ArrayAdapter<Member> memberListAdapter;
 	private ListView listViewMembers;
 	
-private static class MemberArrayAdapter extends ArrayAdapter<Member> {
+	private static class MemberViewHolder {  
+	    private CheckBox checked ;  
+	    private TextView text ; 
+	    
+	    public MemberViewHolder() {}  
+	    
+	    public MemberViewHolder(TextView textview, CheckBox checkbox) {  
+	      this.checked = checkbox ;  
+	      this.text = textview ;  
+	    }  
+	    
+	    public CheckBox getCheckBox() {  
+	      return checked;  
+	    } 
+	    
+	    public void setCheckBox(CheckBox checkbox) {  
+	      this.checked = checkbox;  
+	    }  
+	    
+	    public TextView getTextView() {  
+	      return text;  
+	    }
+	    
+	    public void setTextView(TextView textview) {  
+	      this.text = textview;  
+	    }      
+	}*/ 
+	
+/*private static class MemberArrayAdapter extends ArrayAdapter<Member> {
 		
 		private LayoutInflater inflater;
 		
@@ -85,40 +117,38 @@ private static class MemberArrayAdapter extends ArrayAdapter<Member> {
 	        
 	      return convertView;  
 	    }  
-	}
+	}*/
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_member, container,
-				false);
+		View rootView = inflater.inflate(R.layout.fragment_member, container, false);
 		
-		//Read_CSV.readFile();
-		//ListView listViewMembers = (ListView) rootView.findViewById(R.id.listViewMembers);
-		listViewMembers = (ListView) rootView.findViewById(R.id.listViewMembers);
-	    //ListAdapter adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.listview_members, Read_CSV.getMemberList());
+		ListView listViewMembers = (ListView) rootView.findViewById(R.id.listViewMembers);
+		//listViewMembers = (ListView) findViewById(R.id.listViewMembers);
+	    ListAdapter adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.listview_members, Read_CSV.getMemberList());
 	    //MemberAdapter ... extends BaseAdapter
-	    //listViewMembers.setAdapter(adapter);
+	    listViewMembers.setAdapter(adapter);
 	   
 	    listViewMembers.setOnItemClickListener(new OnItemClickListener() {  	
 	    	@Override
-      	  public void onItemClick(AdapterView<?> parent, View view,
-      	    int position, long id) {
-	    	Member member = memberListAdapter.getItem(position);
-	    	member.toggleChecked();
-	    	MemberViewHolder viewHolder = (MemberViewHolder) view.getTag();
-	    	viewHolder.getCheckBox().setChecked(member.isSelected());
-      	    /*Toast.makeText(getActivity().getApplicationContext(),
-      	      "Click ListItem Number " + position, Toast.LENGTH_LONG)
-      	      .show();*/
-      	  }
+      	    public void onItemClick(AdapterView<?> parent, View view,
+      	    						int position, long id) {
+	    		/*Member member = memberListAdapter.getItem(position);
+	    		member.toggleChecked();
+	    		MemberViewHolder viewHolder = (MemberViewHolder) view.getTag();
+	    		viewHolder.getCheckBox().setChecked(member.isSelected());*/
+	    		Toast.makeText(getActivity().getApplicationContext(),
+      	          "Click ListItem Number " + position, Toast.LENGTH_LONG)
+      	          .show();
+      	    }
       	}); 
 		
-	    ArrayList<Member> memberlist = new ArrayList<Member>();
+	    /*ArrayList<Member> memberlist = new ArrayList<Member>();
 	    memberlist = Read_CSV.readFile();
 	    
-	    memberListAdapter = new MemberArrayAdapter(getActivity().getApplicationContext(), memberlist);
-	    listViewMembers.setAdapter(memberListAdapter);
+	    memberListAdapter = new MemberArrayAdapter(getActivity(), memberlist);
+	    listViewMembers.setAdapter(memberListAdapter);*/
 	    
 		return rootView;
 	}
@@ -128,10 +158,10 @@ private static class MemberArrayAdapter extends ArrayAdapter<Member> {
 			new int[] {android.R.id.text1});
 	lv.setAdapter(simpleAdpt);*/
 
-	/*private ListView findViewById(int listviewmembers) {
+	private ListView findViewById(int listviewmembers) {
 		// TODO Auto-generated method stub
 		return null;
-	}*/
+	}
 	
 	
 

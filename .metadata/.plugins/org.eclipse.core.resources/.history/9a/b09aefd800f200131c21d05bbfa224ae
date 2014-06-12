@@ -1,0 +1,6 @@
+package com.example.rwdmember;
+
+import android.widget.CheckBox;
+import android.widget.TextView;
+
+ 
