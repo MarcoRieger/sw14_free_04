@@ -1,0 +1,105 @@
+package com.example.rwdmember;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileFilter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
+
+
+@SuppressLint("SdCardPath")
+public class Read_CSV extends Activity {
+	private static ArrayList<String> memberList = new ArrayList<String>(); //List<Member>
+	
+	public static ArrayList<String> readFile() { 
+		File f = new File("/sdcard/"); 
+		File[] files = f.listFiles(new FileFilter() {
+			@Override
+			public boolean accept(File path)
+			{
+				//If file or directory is hidden or unreadable, don't show it
+			    if(path.isHidden())
+			      return false;
+			     
+			    if(!path.canRead())
+			      return false;
+			 
+			    if(path.isDirectory())
+			      return true;
+			 
+			    //Check if there is a supported file type that we can read.
+			    String fileName = path.getName();
+			    String fileExt;
+			    int mid= fileName.lastIndexOf(".");
+			    fileExt = fileName.substring(mid+1,fileName.length());
+			    for(String s : supportedFileExtensions) {
+			      if(s.contentEquals(fileExt))
+			        return true;
+			    }
+			    return false;
+			  }
+			}); 
+		
+		
+		  String csvFileToRead = "/sdcard/Download/Namensliste.csv";  
+		  BufferedReader br = null;  
+		  String line = "";  
+		  String splitBy = ",";  
+		  //setMemberList(new ArrayList<Member>());  
+		  
+		  try {  
+		  
+		   br = new BufferedReader(new FileReader(csvFileToRead));  
+		   while ((line = br.readLine()) != null) {  
+		  
+		    // split on comma(',')  
+		    String[] members = line.split(splitBy);  
+		  
+		    // create member object to store values  
+		    Member memberObject = new Member();  
+		  
+		    // add values from csv to member object  
+		    memberObject.setLastName(members[0]);  
+		    memberObject.setFirstName(members[1]);  
+		    memberObject.setBarcode(members[2]);  
+		    memberObject.setSelected(false);  
+		  
+		    // adding member objects to a list
+		    //memberList.add(memberObject);
+		    getMemberList().add(members[0].toString()); 		  
+		   } 
+		   //values stored in memberList!!!  
+
+		  } catch (FileNotFoundException e) {  
+		   e.printStackTrace();  
+		  } catch (IOException e) {  
+		   e.printStackTrace();  
+		  } finally {  
+		   if (br != null) {  
+		    try {  
+		     br.close();  
+		    } catch (IOException e) {  
+		     e.printStackTrace();  
+		    }  
+		   }  
+		  }
+		  return memberList;
+		 }  
+//Here we have a List of Members
+
+	public static ArrayList<String> getMemberList() {
+		return memberList;
+	}
+
+	/*public static void setMemberList(ArrayList<Member> memberList) {
+		Read_CSV.memberList = memberList;
+	}*/
+
+
+}
