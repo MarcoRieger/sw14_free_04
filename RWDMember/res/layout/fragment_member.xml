@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
    
-    <ListView android:id="@+id/listViewMembers"
+    <ListView android:id="@+id/listViewMember"
  		android:layout_height="match_parent"
 		android:layout_width="match_parent"/>
     

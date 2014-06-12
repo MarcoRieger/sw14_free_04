@@ -25,9 +25,9 @@ import android.widget.TextView;
 @SuppressLint("SdCardPath")
 public class Read_CSV extends ListActivity {
 	
-	private static List<Member> memberList = new ArrayList<Member>(); //List<Member>
+	private static ArrayList<Member> memberList = new ArrayList<Member>(); //List<Member>
 	
-	private List<String> item = null;
+	/*private List<String> item = null;
 	private List<String> path = null;
 	private String root;
 	private TextView myPath;
@@ -101,7 +101,7 @@ public class Read_CSV extends ListActivity {
 	      .setPositiveButton("OK", null).show();
 
 	  }
-	 }
+	 }*/
 	
 	public static void readFile() { 
 		  		
@@ -130,7 +130,7 @@ public class Read_CSV extends ListActivity {
 		  
 		    // adding member objects to a list
 		    memberList.add(memberObject);
-		    //getMemberList().add(members[0].toString()); 		  
+		    //getMemberList().add(members[0].toString() + " " + members[1].toString()); 		  
 		   } 
 		   //values stored in memberList!!!  
 
@@ -151,7 +151,7 @@ public class Read_CSV extends ListActivity {
 		 }  
 //Here we have a List of Members
 
-	public static List<Member> getMemberList() {
+	public static ArrayList<Member> getMemberList() {
 		return memberList;
 	}
 

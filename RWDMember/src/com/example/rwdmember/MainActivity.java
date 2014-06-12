@@ -104,7 +104,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	        search();
 	        return true;
 	    case R.id.menuitem_open:
-	        
+	    	//---Implement Open File Dialog!!!
+	        Read_CSV.readFile();
 	        return true;
 	    case R.id.menuitem_save:
 	        saveFile();
@@ -155,7 +156,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			case 0:	
 				return Fragment_Scanner.newInstance(0);
 			case 1:
-				return Fragment_Member.newInstance(1);	
+				return Fragment_Member.newInstance(1);
 			case 2:
 				return Fragment_Statistic.newInstance(2);
 			default: 
@@ -184,7 +185,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			return null;
 		}
 	}
-
 	
 	public void scanBarcode (View view){
 		IntentIntegrator integrator = new IntentIntegrator(this);
