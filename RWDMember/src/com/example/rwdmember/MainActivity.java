@@ -2,6 +2,7 @@ package com.example.rwdmember;
 
 //import java.io.IOException;
 //import java.util.List;
+import java.util.ArrayList;
 import java.util.Locale;
 
 import android.app.ActionBar;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.widget.EditText;
 //import android.widget.ListView;
 //import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
@@ -104,8 +106,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	        search();
 	        return true;
 	    case R.id.menuitem_open:
-	    	//---Implement Open File Dialog!!!
-	        Read_CSV.readFile();
+	    	//--- Implement Open File Dialog!!!
+	        //--- Then call Read_CSV.readfile(pathToCSV)
 	        return true;
 	    case R.id.menuitem_save:
 	        saveFile();
@@ -193,13 +195,26 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 	    IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+	    ArrayList<Member> members = Read_CSV.getMemberList();
 	    if (scanResult != null) {
 	    	String barcode;
 	    	barcode = scanResult.getContents();
-	    	
 	    	EditText etBarcode = (EditText) findViewById(R.id.etBarcode);
 	    	
-	    	etBarcode.setText(barcode);
+	    	//--- Test for refreshing Member Fragment
+	    	members.get(0).setSelected(true);
+	    	
+	    	for (int i = 0; i < members.size(); i++) {
+	    		if (members.get(i).getBarcode() == barcode) { 
+	    			members.get(i).setSelected(true);
+	    			etBarcode.setText(barcode);
+	    			
+	    			Toast.makeText(getApplicationContext(), 
+	    			  members.get(i).getLastName() + " " + members.get(i).getFirstName() + " checked in!", Toast.LENGTH_LONG)
+	    			  .show();
+	    		}
+	    	}
+	    	Read_CSV.setMemberList(members);
 	    }
 	  // else continue with any other code you need in the method
 	}
