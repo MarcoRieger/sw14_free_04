@@ -2,10 +2,10 @@ package com.example.rwdmember;
 
 public class Member {
   
- String firstName = null;
- String lastName = null;
- String Barcode = null;
- boolean selected = false;
+ private String firstName = null;
+ private String lastName = null;
+ private String Barcode = null;
+ private boolean selected = false;
  
  public Member() {}
   
