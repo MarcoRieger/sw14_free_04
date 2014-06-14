@@ -11,6 +11,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.v13.app.FragmentPagerAdapter;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -98,7 +99,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		getMenuInflater().inflate(R.menu.over_all, menu);
 		return true;
 	}
-
+	final int ACTIVITY_CHOOSE_FILE = 1;
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -106,6 +107,16 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	        search();
 	        return true;
 	    case R.id.menuitem_open:
+	    	//---Implement Open File Dialog!!!
+	    	Intent chooseFile;
+	    	Intent intent;
+	    	chooseFile = new Intent(Intent.ACTION_GET_CONTENT);
+	    	chooseFile.setType("file/*");
+	    	intent = Intent.createChooser(chooseFile, "Choose a file");
+	    	startActivityForResult(intent, ACTIVITY_CHOOSE_FILE);
+	    	
+	        Read_CSV.readFile();
+
 	    	//--- Implement Open File Dialog!!!
 	        //--- Then call Read_CSV.readfile(pathToCSV)
 	        return true;
@@ -216,6 +227,18 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	    	}
 	    	Read_CSV.setMemberList(members);
 	    }
+	    
+	    switch(requestCode) {
+			case ACTIVITY_CHOOSE_FILE: {
+				if (resultCode == RESULT_OK){
+					Uri uri = intent.getData();
+					String filePath = uri.getPath();
+					EditText etBarcode = (EditText) findViewById(R.id.etBarcode);
+			    	etBarcode.setText(filePath);
+				}
+			}
+		}
+	    
 	  // else continue with any other code you need in the method
 	}
 	
