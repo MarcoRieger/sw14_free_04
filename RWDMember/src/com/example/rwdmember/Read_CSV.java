@@ -38,7 +38,9 @@ public class Read_CSV extends ListActivity {
 	//--- will get path from Open File Dialog and then read selected file
 	//public static void readFile(String filepath) {
 	public static void readFile() { 
-		  		
+		  if(!memberList.isEmpty()) {
+			  memberList.clear();
+		  }		
 		  String csvFileToRead = "/sdcard/Download/Namensliste.csv";  
 		  BufferedReader br = null;  
 		  String line = "";  

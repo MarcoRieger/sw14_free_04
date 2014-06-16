@@ -2,6 +2,7 @@ package com.example.rwdmember;
 
 //import java.io.IOException;
 //import java.util.List;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -10,7 +11,11 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.support.v13.app.FragmentPagerAdapter;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -98,7 +103,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		getMenuInflater().inflate(R.menu.over_all, menu);
 		return true;
 	}
-
+	final int ACTIVITY_CHOOSE_FILE = 1;
+	final int PICK_REQUEST_CODE = 1;
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -106,6 +112,16 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	        search();
 	        return true;
 	    case R.id.menuitem_open:
+	    	//---Implement Open File Dialog!!!
+	    	Intent chooseFile;
+	    	Intent intent;
+	    	chooseFile = new Intent(Intent.ACTION_GET_CONTENT);
+	    	chooseFile.setType("file/*");
+	    	intent = Intent.createChooser(chooseFile, "Choose a .csv file");
+	    	startActivityForResult(intent, ACTIVITY_CHOOSE_FILE);
+//im onActivityResult geht es in der switch weiter
+	        Read_CSV.readFile();
+
 	    	//--- Implement Open File Dialog!!!
 	        //--- Then call Read_CSV.readfile(pathToCSV)
 	        return true;
@@ -202,20 +218,34 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	    	EditText etBarcode = (EditText) findViewById(R.id.etBarcode);
 	    	
 	    	//--- Test for refreshing Member Fragment
-	    	members.get(0).setSelected(true);
+	    	//members.get(0).setSelected(true);
 	    	
 	    	for (int i = 0; i < members.size(); i++) {
-	    		if (members.get(i).getBarcode() == barcode) { 
+	    		if (members.get(i).getBarcode().equals(barcode)) { 
 	    			members.get(i).setSelected(true);
 	    			etBarcode.setText(barcode);
-	    			
-	    			Toast.makeText(getApplicationContext(), 
-	    			  members.get(i).getLastName() + " " + members.get(i).getFirstName() + " checked in!", Toast.LENGTH_LONG)
-	    			  .show();
+	    			break;   			
+//	    			Toast.makeText(getApplicationContext(), 
+//	    			  members.get(i).getLastName() + " " + members.get(i).getFirstName() + " checked in!", Toast.LENGTH_LONG)
+//	    			  .show();
 	    		}
 	    	}
 	    	Read_CSV.setMemberList(members);
 	    }
+	    
+	    switch(requestCode) {
+			case ACTIVITY_CHOOSE_FILE: {
+				if (resultCode == RESULT_OK){
+					Uri uri = intent.getData();
+					String filePath = uri.getPath();
+					Toast.makeText(getApplicationContext(), 
+			    			  filePath + " "  + " wird geöffnet!", Toast.LENGTH_LONG).show();
+					
+					
+				}
+			}
+		}
+	    
 	  // else continue with any other code you need in the method
 	}
 	
