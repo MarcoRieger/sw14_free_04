@@ -56,6 +56,7 @@ public class MainTest extends ActivityInstrumentationTestCase2<MainActivity> {
 	public void testMemberView() {
 		mySolo.clickOnActionBarItem(1);
 		mySolo.clickOnMenuItem("Open CSV File");
-	
+		
+		
 	}
 }

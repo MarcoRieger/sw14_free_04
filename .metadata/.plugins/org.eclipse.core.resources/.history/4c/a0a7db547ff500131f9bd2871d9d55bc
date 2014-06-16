@@ -20,7 +20,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 @SuppressLint("SdCardPath")
@@ -40,6 +39,7 @@ public class Read_CSV extends ListActivity {
 		  if(!memberList.isEmpty()) {
 			  memberList.clear();
 		  }		
+		  //String filepath = "/sdcard/Download/Namensliste.csv";  
 		  BufferedReader br = null;  
 		  String line = "";  
 		  String splitBy = ",";    
@@ -65,10 +65,12 @@ public class Read_CSV extends ListActivity {
 		    else {
 		    	memberObject.setSelected(true);
 		    }
-
+		      
+		  
 		    // adding member objects to a list
 		    memberList.add(memberObject);		  
 		   } 
+		   //values stored in memberList!!!  
 
 		  } catch (FileNotFoundException e) {  
 		   e.printStackTrace();  

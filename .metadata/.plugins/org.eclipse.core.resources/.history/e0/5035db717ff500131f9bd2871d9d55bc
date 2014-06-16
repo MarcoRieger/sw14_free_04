@@ -40,6 +40,7 @@ public class Read_CSV extends ListActivity {
 		  if(!memberList.isEmpty()) {
 			  memberList.clear();
 		  }		
+		  //String filepath = "/sdcard/Download/Namensliste.csv";  
 		  BufferedReader br = null;  
 		  String line = "";  
 		  String splitBy = ",";    
@@ -60,15 +61,17 @@ public class Read_CSV extends ListActivity {
 		    memberObject.setFirstName(members[1]);  
 		    memberObject.setBarcode(members[2]);
 		    if (members[3].equals("0")) {
-		    	memberObject.setSelected(false);
+		    	memberObject.setSelected(true);
 		    }
 		    else {
 		    	memberObject.setSelected(true);
 		    }
-
+		      
+		  
 		    // adding member objects to a list
 		    memberList.add(memberObject);		  
 		   } 
+		   //values stored in memberList!!!  
 
 		  } catch (FileNotFoundException e) {  
 		   e.printStackTrace();  

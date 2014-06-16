@@ -1,9 +1,8 @@
 package com.example.rwdmember;
 import java.util.ArrayList;
-
 import java.util.Arrays;
 import java.util.List;
-import android.annotation.SuppressLint;
+
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
@@ -15,7 +14,6 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class Fragment_Member extends Fragment {
 	
@@ -35,16 +33,21 @@ public class Fragment_Member extends Fragment {
 	private ListView listViewMembers;
 	private Member[] members;
 	private ArrayAdapter<Member> memberAdapter;
+	private boolean firstLoader = true;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_member, container, false);
 		
+		if (firstLoader) {
+			Read_CSV.readFile("/sdcard/rwd/Namensliste.csv");
+			firstLoader = false;
+		}
 		listViewMembers = (ListView) rootView.findViewById(R.id.listViewMember);
 		ArrayList<Member> memberlist = Read_CSV.getMemberList();
 		memberAdapter = new MemberArrayAdapter(getActivity().getApplicationContext(), memberlist);
 		memberAdapter.notifyDataSetChanged();
-		listViewMembers.setAdapter(memberAdapter);
+	    listViewMembers.setAdapter(memberAdapter);
 	   
 	    listViewMembers.setOnItemClickListener(new AdapterView.OnItemClickListener() {  	
 	    	@Override
@@ -54,13 +57,14 @@ public class Fragment_Member extends Fragment {
 	    		member.toggleChecked();
 	    		MemberViewHolder viewHolder = (MemberViewHolder) view.getTag();
 	    		viewHolder.getCheckBox().setChecked(member.isSelected());
-	    		Toast.makeText(getActivity().getApplicationContext(),
-      	          "Member Number: " + member.getBarcode(), Toast.LENGTH_LONG)
-      	          .show();
+	    		/*Toast.makeText(getActivity().getApplicationContext(),
+      	          "Click ListItem Number " + position, Toast.LENGTH_LONG)
+      	          .show();*/
       	    }
       	});
 	    
-	    return rootView;
+	    //this.refresh(Read_CSV.getMemberList());	    
+		return rootView;
 	}
 	
 	private static class MemberViewHolder {

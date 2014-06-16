@@ -65,10 +65,12 @@ public class Read_CSV extends ListActivity {
 		    else {
 		    	memberObject.setSelected(true);
 		    }
-
+		      
+		  
 		    // adding member objects to a list
 		    memberList.add(memberObject);		  
 		   } 
+		   //values stored in memberList!!!  
 
 		  } catch (FileNotFoundException e) {  
 		   e.printStackTrace();  

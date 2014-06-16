@@ -216,10 +216,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	    		if (members.get(i).getBarcode().equals(barcode)) { 
 	    			members.get(i).setSelected(true);
 	    			etBarcode.setText(barcode);
-	    			Toast.makeText(getApplicationContext(), 
-	  	    			  members.get(i).getLastName() + " " + members.get(i).getFirstName() + " checked in!", Toast.LENGTH_LONG)
-	  	    			  .show();
 	    			break;   			
+//	    			Toast.makeText(getApplicationContext(), 
+//	    			  members.get(i).getLastName() + " " + members.get(i).getFirstName() + " checked in!", Toast.LENGTH_LONG)
+//	    			  .show();
 	    		}
 	    	}
 	    	Read_CSV.setMemberList(members);

@@ -41,12 +41,12 @@ public class MainTest extends ActivityInstrumentationTestCase2<MainActivity> {
 		mySolo.clickOnMenuItem("Save to File");
 	}
 	
-	//---Scan the Member Card of Member01 for positive result
+	//---Scan the Member Card of Member01 Rieger for positive result
 	//---Requires testing with an android mobile phone
 	public void testInputField() {
 		mySolo.clickOnButton("Scan");
 		
-		String strIn = "20140001";
+		String strIn = "1011002051001";
 		
 		boolean test_input = mySolo.searchEditText(strIn);
 		
@@ -56,6 +56,7 @@ public class MainTest extends ActivityInstrumentationTestCase2<MainActivity> {
 	public void testMemberView() {
 		mySolo.clickOnActionBarItem(1);
 		mySolo.clickOnMenuItem("Open CSV File");
-	
+		
+		
 	}
 }

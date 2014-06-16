@@ -1,6 +1,5 @@
 package com.example.rwdmember;
 import java.util.ArrayList;
-
 import java.util.Arrays;
 import java.util.List;
 import android.annotation.SuppressLint;
@@ -35,16 +34,23 @@ public class Fragment_Member extends Fragment {
 	private ListView listViewMembers;
 	private Member[] members;
 	private ArrayAdapter<Member> memberAdapter;
+	private boolean firstLoader = true;
 	
+	@SuppressLint("SdCardPath")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_member, container, false);
 		
+		if (firstLoader) {
+			Read_CSV.readFile("/sdcard/rwd/Namensliste.csv");
+			firstLoader = false;
+		}
 		listViewMembers = (ListView) rootView.findViewById(R.id.listViewMember);
 		ArrayList<Member> memberlist = Read_CSV.getMemberList();
 		memberAdapter = new MemberArrayAdapter(getActivity().getApplicationContext(), memberlist);
-		memberAdapter.notifyDataSetChanged();
-		listViewMembers.setAdapter(memberAdapter);
+		//memberAdapter.notifyDataSetChanged();
+		listViewMembers.invalidateViews();
+	    listViewMembers.setAdapter(memberAdapter);
 	   
 	    listViewMembers.setOnItemClickListener(new AdapterView.OnItemClickListener() {  	
 	    	@Override
