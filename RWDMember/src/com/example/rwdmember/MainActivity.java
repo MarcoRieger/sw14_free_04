@@ -112,18 +112,13 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	        search();
 	        return true;
 	    case R.id.menuitem_open:
-	    	//---Implement Open File Dialog!!!
+	    	//--- Open File Dialog
 	    	Intent chooseFile;
 	    	Intent intent;
 	    	chooseFile = new Intent(Intent.ACTION_GET_CONTENT);
 	    	chooseFile.setType("file/*");
 	    	intent = Intent.createChooser(chooseFile, "Choose a .csv file");
 	    	startActivityForResult(intent, ACTIVITY_CHOOSE_FILE);
-//im onActivityResult geht es in der switch weiter
-	        Read_CSV.readFile();
-
-	    	//--- Implement Open File Dialog!!!
-	        //--- Then call Read_CSV.readfile(pathToCSV)
 	        return true;
 	    case R.id.menuitem_save:
 	        saveFile();
@@ -217,9 +212,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	    	barcode = scanResult.getContents();
 	    	EditText etBarcode = (EditText) findViewById(R.id.etBarcode);
 	    	
-	    	//--- Test for refreshing Member Fragment
-	    	//members.get(0).setSelected(true);
-	    	
 	    	for (int i = 0; i < members.size(); i++) {
 	    		if (members.get(i).getBarcode().equals(barcode)) { 
 	    			members.get(i).setSelected(true);
@@ -238,10 +230,16 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 				if (resultCode == RESULT_OK){
 					Uri uri = intent.getData();
 					String filePath = uri.getPath();
+					String[] pathFragments = filePath.split("/");
+					filePath = "/sdcard";
+					int i = 3;
+					while (i < pathFragments.length) {
+						filePath += "/" + pathFragments[i];
+						i++;
+					}
 					Toast.makeText(getApplicationContext(), 
-			    			  filePath + " "  + " wird geöffnet!", Toast.LENGTH_LONG).show();
-					
-					
+							filePath + " " + " is opened!", Toast.LENGTH_LONG).show();
+					Read_CSV.readFile(filePath);					
 				}
 			}
 		}

@@ -25,10 +25,10 @@ public class Fragment_Member extends Fragment {
 		//Test	
 	}
 	
-	private void refresh(ArrayList<Member> newList) {
+	/*private void refresh(ArrayList<Member> newList) {
 		memberAdapter = new MemberArrayAdapter(getActivity().getApplicationContext(), newList);
 		memberAdapter.notifyDataSetChanged();
-	}
+	}*/
 	
 	private ListView listViewMembers;
 	private Member[] members;
@@ -38,10 +38,10 @@ public class Fragment_Member extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_member, container, false);
 		
-		Read_CSV.readFile();
 		listViewMembers = (ListView) rootView.findViewById(R.id.listViewMember);
 		ArrayList<Member> memberlist = Read_CSV.getMemberList();
 		memberAdapter = new MemberArrayAdapter(getActivity().getApplicationContext(), memberlist);
+		memberAdapter.notifyDataSetChanged();
 	    listViewMembers.setAdapter(memberAdapter);
 	   
 	    listViewMembers.setOnItemClickListener(new AdapterView.OnItemClickListener() {  	
@@ -58,7 +58,7 @@ public class Fragment_Member extends Fragment {
       	    }
       	});
 	    
-	    this.refresh(Read_CSV.getMemberList());	    
+	    //this.refresh(Read_CSV.getMemberList());	    
 		return rootView;
 	}
 	
