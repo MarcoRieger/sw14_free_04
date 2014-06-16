@@ -2,10 +2,20 @@ package com.example.rwdmember;
 
 //import java.io.IOException;
 //import java.util.List;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -19,6 +29,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +38,7 @@ import android.widget.EditText;
 //import android.widget.ListView;
 //import android.widget.SimpleAdapter;
 import android.widget.Toast;
+import au.com.bytecode.opencsv.CSVWriter;
 
 
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
@@ -83,17 +96,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 					.setText(mSectionsPagerAdapter.getPageTitle(i))
 					.setTabListener(this));
 		}
-		
-		
-		//ListView lv = (ListView) findViewById(R.id.listView);
-
-	    // This is a simple adapter that accepts as parameter
-	    // Context
-	    // Data list
-	    // The row layout that is used during the row creation
-	    // The keys used to retrieve the data
-	    // The View id used to show the data. The key number and the view id must match
-
 	}
 
 	@Override
@@ -121,7 +123,12 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	    	startActivityForResult(intent, ACTIVITY_CHOOSE_FILE);
 	        return true;
 	    case R.id.menuitem_save:
-	        saveFile();
+	        try {
+				saveFile();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	        return true;
 	    case R.id.action_settings:
 	        Settings();
@@ -252,13 +259,48 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	}
 	
 		
-	public void saveFile (){
-		//Save File as new CSV With option to set File name
+	public void saveFile() throws IOException {
+		Long tStamp = System.currentTimeMillis() / 1000;
+		File logFile = new File("/sdcard/rwd/" + getDate(tStamp.toString()) + ".csv");
+		
+		if (!logFile.exists()) {
+            try {
+                logFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+        	ArrayList<Member> mems = new ArrayList<Member>();
+    		mems = Read_CSV.getMemberList();
+            BufferedWriter buf = new BufferedWriter(new FileWriter(logFile, true));
+            for (int i = 0; i < mems.size(); i++) {
+    			buf.append(mems.get(i).getLastName()+ "," + mems.get(i).getFirstName() + "," + mems.get(i).getBarcode());
+    		}
+            buf.newLine();
+            buf.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+		
+		Toast.makeText(getApplicationContext(), "Wrote " + logFile.toString(), Toast.LENGTH_LONG).show();
+    
 	}
 	
 	public void Settings (){
 		//Output for Settings
 	}
+	
+	private String getDate(String timeStamp) {
+		try {
+		    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+		    Date netDate = (new Date(Long.parseLong(timeStamp)));
+		    return sdf.format(netDate);
+		}
+		catch(Exception ex) {
+		    return "xx";
+			}
+		} 
 	
 	
 }

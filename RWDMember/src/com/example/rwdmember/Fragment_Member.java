@@ -55,7 +55,7 @@ public class Fragment_Member extends Fragment {
 	    		MemberViewHolder viewHolder = (MemberViewHolder) view.getTag();
 	    		viewHolder.getCheckBox().setChecked(member.isSelected());
 	    		Toast.makeText(getActivity().getApplicationContext(),
-      	          "Member Number: " + member.getBarcode(), Toast.LENGTH_LONG)
+      	          "Member Number: " + member.getBarcode(), Toast.LENGTH_SHORT)
       	          .show();
       	    }
       	});
