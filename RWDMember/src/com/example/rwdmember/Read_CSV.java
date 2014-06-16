@@ -35,21 +35,18 @@ public class Read_CSV extends ListActivity {
 		memberList = list;
 	}
 	
-	//--- will get path from Open File Dialog and then read selected file
-	//public static void readFile(String filepath) {
-	public static void readFile() { 
+	public static void readFile(String filePath) {
 		  if(!memberList.isEmpty()) {
 			  memberList.clear();
 		  }		
-		  String csvFileToRead = "/sdcard/Download/Namensliste.csv";  
+		  //String filepath = "/sdcard/Download/Namensliste.csv";  
 		  BufferedReader br = null;  
 		  String line = "";  
-		  String splitBy = ",";  
-		  //setMemberList(new ArrayList<Member>());  
+		  String splitBy = ",";    
 		  
 		  try {  
 		  
-		   br = new BufferedReader(new FileReader(csvFileToRead));  
+		   br = new BufferedReader(new FileReader(filePath));  
 		   while ((line = br.readLine()) != null) {  
 		  
 		    // split on comma(',')  
@@ -65,8 +62,7 @@ public class Read_CSV extends ListActivity {
 		    memberObject.setSelected(false);  
 		  
 		    // adding member objects to a list
-		    memberList.add(memberObject);
-		    //getMemberList().add(members[0].toString() + " " + members[1].toString()); 		  
+		    memberList.add(memberObject);		  
 		   } 
 		   //values stored in memberList!!!  
 
